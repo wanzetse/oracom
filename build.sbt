@@ -134,7 +134,7 @@ PlayKeys.playDefaultPort := 9001
 libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
 
 libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
-
+libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.8.11"
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
