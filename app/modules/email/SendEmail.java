@@ -78,7 +78,7 @@ public class SendEmail {
           //  generateEmailReport(from,emailList,emailDelivered,);
 
         }
-        logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
+       // logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
 
     }
 
@@ -119,7 +119,7 @@ public class SendEmail {
 
 
         }
-        logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
+        //logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
 
     }
 
@@ -147,7 +147,7 @@ public class SendEmail {
             return null;
 
         }
-        logger.info("-----------------------------------------------Emails | {} |", emails);
+       // logger.info("-----------------------------------------------Emails | {} |", emails);
 
 
         return emails;
