@@ -53,7 +53,7 @@ public class SendEmail {
             MailMessage message = new MailMessage()
                     .setSubject(subject)
                     .setFrom(from)
-                    .setTo(emailList)
+                    .setTo(emailList.get(i))
                     //.setAttachment()
                     // .setCc("Another User <another@example.net>")
                     .setText(body);
@@ -126,10 +126,16 @@ public class SendEmail {
 
     private List<String> getEmails() {
         String rawSQL = "SELECT Email_1" + "FROM TBBUSINESSES";
-        List<String> emails = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Email_2").findSingleAttributeList();
+        //List<String> emails = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Email_2").findSingleAttributeList();
         List<Branch> brlist=Branch.find.all();
-        for(int i=0;i<2;i++){
-        System.out.println(emails);
+        List<String> emails=new ArrayList<String>();
+        for(int i=0;i<brlist.size();i++){
+        String email=brlist.get(i).getEmail_1();
+        if(email.length()>4){
+            emails.add(email);
+        logger.info("----------------------------------------------- Email |{}|", email);
+
+        }
     }
         /*
         List<String> emails =
