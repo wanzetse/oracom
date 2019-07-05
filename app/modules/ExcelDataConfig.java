@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import play.mvc.Http;
+import io.ebean.Model;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -16,14 +17,14 @@ import java.util.Locale;
 
 import static org.hibernate.util.ConfigHelper.getResourceAsStream;
 
-public class ExcelDataConfig {
+public class ExcelDataConfig extends Model{
     public static HSSFWorkbook wb;
     public static HSSFSheet sheet;
 
-    public static String[] sheetColumns = {"Company_Name", "Company_Category", "Company_Subcategory", "Email_1", "Email_2",
+   /* public static String[] sheetColumns = {"Company_Name", "Company_Category", "Company_Subcategory", "Email_1", "Email_2",
             "Phone_1", "Phone_2", "Website", "County", "Town", "Street_Name", "Building", "Latitude",
             "Longitude", "companyBranch", "Status", "Services", "Comments", "CreatedBy", "DateCreated"
-    };
+    };*/
 
     public ExcelDataConfig(String excelPath) {
         try {
@@ -37,6 +38,7 @@ public class ExcelDataConfig {
 
     }
 
+
     public static void readExcel(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -47,169 +49,30 @@ public class ExcelDataConfig {
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
 
-        XSSFRow row;
-        for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
 
 
-            String Company_Name;
+       sheet.forEach(row -> {
+        
+        final String[] branchi=new String[20];
+            row.forEach(cell -> {
 
-            if (row.getCell(0) == null) {
-                Company_Name = "null";
+                 String cellValue = formatter.formatCellValue(cell);
+                if(cellValue==null){
 
-            } else {
+                    cellValue="null";
+                }
+              branchi[count]=cellValue;
+              count++;
 
-                Company_Name = formatter.formatCellValue(row.getCell(0));
+               
+            });
+          Branch oldBranch=new Branch(branchi[0],branchi[1],branchi[2],
+            branchi[3],branchi[4],branchi[5],branchi[6],branchi[7],
+            branchi[8],branchi[9],branchi[10],branchi[11],
+            branchi[12],branchi[13],branchi[14],branchi[15],branchi[16],branchi[17],branchi[18],branchi[18]);
+          oldBranch.save();
+        });
 
-            }   //else copies cell data to name variable
-
-            String companyCategory;
-
-            if (row.getCell(1) == null) {
-                companyCategory = "null";
-            } else {
-
-                companyCategory = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String companySubCategory;
-
-            if (row.getCell(2) == null) {
-                companySubCategory = "null";
-
-            } else {
-                companySubCategory = formatter.formatCellValue(row.getCell(2));
-            }
-
-            String email_1;
-
-            if (row.getCell(3) == null) {
-                email_1 = "null";
-            } else {
-                email_1 = formatter.formatCellValue(row.getCell(3));
-            }
-
-            String email_2;
-
-            if (row.getCell(4) == null) {
-                email_2 = "null";
-            } else {
-                email_2 = formatter.formatCellValue(row.getCell(4));
-            }
-
-            String phone_1;
-
-            if (row.getCell(5) == null) {
-                phone_1 = "null";
-            } else {
-                phone_1 = formatter.formatCellValue(row.getCell(5)).trim();
-            }
-
-            String phone_2;
-
-            if (row.getCell(6) == null) {
-                phone_2 = "null";
-            } else {
-                phone_2 = formatter.formatCellValue(row.getCell(6)).trim();
-            }
-
-            String website;
-
-            if (row.getCell(7) == null) {
-                website = "null";
-            } else {
-                website = formatter.formatCellValue(row.getCell(7));
-            }
-
-            String county;
-
-            if (row.getCell(8) == null) {
-                county = "null";
-            } else {
-                county = formatter.formatCellValue(row.getCell(8));
-            }
-
-            String town;
-
-            if (row.getCell(9) == null) {
-                town = "null";
-            } else {
-                town = formatter.formatCellValue(row.getCell(9));
-            }
-            String Street_Name;
-
-            if (row.getCell(10) == null) {
-                Street_Name = "null";
-            } else {
-                Street_Name = formatter.formatCellValue(row.getCell(10));
-            }
-
-            String building;
-
-            if (row.getCell(11) == null) {
-                building = "null";
-            } else {
-                building = formatter.formatCellValue(row.getCell(11));
-            }
-
-            String MapLatitude;
-
-            if (row.getCell(12) == null) {
-                MapLatitude = "null";
-            } else {
-                MapLatitude = formatter.formatCellValue(row.getCell(12));
-            }
-            String MapLongitude;
-
-            if (row.getCell(13) == null) {
-                MapLongitude = "null";
-            } else {
-                MapLongitude = formatter.formatCellValue(row.getCell(13));
-            }
-
-            String companyBranch;
-
-            if (row.getCell(14) == null) {
-                companyBranch = "null";
-            } else {
-                companyBranch = formatter.formatCellValue(row.getCell(14));
-            }
-
-            String Status;
-
-            if (row.getCell(15) == null) {
-                Status = "null";
-            } else {
-                Status = formatter.formatCellValue(row.getCell(15));
-            }
-
-            String services;
-
-            if (row.getCell(16) == null) {
-                services = "null";
-            } else {
-                services = formatter.formatCellValue(row.getCell(16));
-            }
-
-            String comments;
-
-            if (row.getCell(17) == null) {
-                comments = "null";
-            } else {
-                comments = formatter.formatCellValue(row.getCell(17));
-            }
-
-
-            Branch oldBranch = new Branch(Company_Name, companyCategory, companySubCategory, email_1, email_2, phone_1, phone_2, website,
-                    county, town, Street_Name, building, MapLatitude, MapLongitude, companyBranch, Status, services, comments, createdBy, dateCreated);
-
-            oldBranch.save();
-
-            //log the data
-            BranchesController.logger.info("####################################################UPLOADED BY {} ", createdBy);
-
-
-        }
 
         try {
 
