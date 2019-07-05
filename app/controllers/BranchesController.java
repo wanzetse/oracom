@@ -147,12 +147,17 @@ public class BranchesController extends Controller {
     }
 
 
-    @BodyParser.Of(BodyParser.Json.class)
+   // @BodyParser.Of(BodyParser.Json.class)
     public CompletionStage<Result> sendEmail() {
 
         JsonNode json = request().body().asJson();
         ObjectNode result = Json.newObject();
-
+        DynamicForm emaidata=formFactory.form().bindFromRequest();
+        emailFrom=emaidata.get("fromTextField");
+         emailPassword=emaidata.get("passwordTextField");
+          emailSubject=emaidata.get("subjectTextField");
+           emailBody=emaidata.get("bodyTextField");
+/*
         emailFrom = json.get("fromTextField").asText();
         emailPassword = json.get("passwordTextField").asText();
         emailSubject = json.get("subjectTextField").asText();

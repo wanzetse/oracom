@@ -127,6 +127,10 @@ public class SendEmail {
     private List<String> getEmails() {
         String rawSQL = "SELECT Email_1" + "FROM TBBUSINESSES";
         List<String> emails = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Email_2").findSingleAttributeList();
+        List<Branch> brlist=Branch.find.all();
+        for(int i=0;i<2;i++){
+        System.out.println(emails);
+    }
         /*
         List<String> emails =
                 Branch.finder.query().where().startsWith("Company_Name","a").select("Email_2").findSingleAttributeList();

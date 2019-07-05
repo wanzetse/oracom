@@ -266,6 +266,7 @@ public class Branch extends Model {
         users.add(userManagement);
     }
 */
+    public static Finder<Integer,Branch> find=new Finder<>(Branch.class);
     public static Branch getBranchById(Integer id) {
         return finder.query().where().eq("Id", id).findOne();
     }

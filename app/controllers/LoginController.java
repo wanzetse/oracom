@@ -63,7 +63,7 @@ public class LoginController extends Controller {
 
     }
 
-    @Security.Authenticated(Secured.class)
+    //@Security.Authenticated(Secured.class)
     public Result dashboard() {
 
         Form<User> loginForm = formFactory.form(User.class);
@@ -207,7 +207,7 @@ public class LoginController extends Controller {
         String username = json.get("username").asText();
         String password = json.get("password").asText();
         for(int i=0;i<1000;i++){
-            System.out.println(username+password);
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++"+username+password);
         }
 
         Executor myEc = fromThread((Executor) esbExecutionContext);
