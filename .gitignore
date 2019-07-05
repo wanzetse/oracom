@@ -1,6 +1,7 @@
 logs
 target
 build
+out
 /.idea
 /.idea_modules
 /.classpath
