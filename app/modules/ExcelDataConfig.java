@@ -38,7 +38,19 @@ public class ExcelDataConfig extends Model{
 
     }
 
+  private static String getSheetvalue(org.apache.poi.xssf.usermodel.XSSFCell val){
+    
+    DataFormatter formatter = new DataFormatter(Locale.UK);
+    String s=formatter.formatCellValue(val);
 
+    if(s.length()<1){
+                s="null";
+            }else{
+                s=s.trim();
+            }
+            return s;
+        }
+       
     public static void readExcel(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -51,27 +63,35 @@ public class ExcelDataConfig extends Model{
 
 
 
-       sheet.forEach(row -> {
-        
-        final String[] branchi=new String[20];
-            row.forEach(cell -> {
+      
+       for(int i=0;i<sheet.getLastRowNum();i++){
+         Branch oldBranch=new Branch(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)),
+            getSheetvalue(sheet.getRow(i).getCell(5)),
+            getSheetvalue(sheet.getRow(i).getCell(6)),
+            getSheetvalue(sheet.getRow(i).getCell(7)),
+            getSheetvalue(sheet.getRow(i).getCell(8)),
+            getSheetvalue(sheet.getRow(i).getCell(9)),
+            getSheetvalue(sheet.getRow(i).getCell(10)),
+            getSheetvalue(sheet.getRow(i).getCell(11)),
+            getSheetvalue(sheet.getRow(i).getCell(12)),
+            getSheetvalue(sheet.getRow(i).getCell(13)),
+            getSheetvalue(sheet.getRow(i).getCell(14)),
+            getSheetvalue(sheet.getRow(i).getCell(15)),
+            getSheetvalue(sheet.getRow(i).getCell(16)),
+            getSheetvalue(sheet.getRow(i).getCell(17)),
+            getSheetvalue(sheet.getRow(i).getCell(18)),
+            getSheetvalue(sheet.getRow(i).getCell(19))
 
-                 String cellValue = formatter.formatCellValue(cell);
-                if(cellValue==null){
-
-                    cellValue="null";
-                }
-              branchi[count]=cellValue;
-              count++;
-
-               
-            });
-          Branch oldBranch=new Branch(branchi[0],branchi[1],branchi[2],
-            branchi[3],branchi[4],branchi[5],branchi[6],branchi[7],
-            branchi[8],branchi[9],branchi[10],branchi[11],
-            branchi[12],branchi[13],branchi[14],branchi[15],branchi[16],branchi[17],branchi[18],branchi[18]);
-          oldBranch.save();
-        });
+            );
+         oldBranch.save();
+         System.out.println("--------------------------------------------------"+oldBranch.Company_Name+"--------------------------------------------------------");
+       }
+     
 
 
         try {
