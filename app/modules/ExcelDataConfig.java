@@ -1,7 +1,8 @@
 package modules;
-
+import javax.persistence.*;
 import controllers.BranchesController;
 import models.*;
+import java.util.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -17,7 +18,7 @@ import java.util.Locale;
 
 import static org.hibernate.util.ConfigHelper.getResourceAsStream;
 
-public class ExcelDataConfig extends Model{
+public class ExcelDataConfig {
     public static HSSFWorkbook wb;
     public static HSSFSheet sheet;
 
@@ -37,10 +38,10 @@ public class ExcelDataConfig extends Model{
         }
 
     }
-
+ static DataFormatter formatter = new DataFormatter(Locale.UK);
   private static String getSheetvalue(org.apache.poi.xssf.usermodel.XSSFCell val){
     
-    DataFormatter formatter = new DataFormatter(Locale.UK);
+   
     String s=formatter.formatCellValue(val);
 
     if(s.length()<1){
@@ -50,20 +51,17 @@ public class ExcelDataConfig extends Model{
             }
             return s;
         }
-       
+    @play.db.ebean.Transactional
     public static void readExcel(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
-        DataFormatter formatter = new DataFormatter(Locale.UK);
+        
 
         InputStream file = new FileInputStream(new File(uploadedFile.getPath()));
 
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
 
-
-
-      
        for(int i=0;i<sheet.getLastRowNum();i++){
          Branch oldBranch=new Branch(
             getSheetvalue(sheet.getRow(i).getCell(0)),
@@ -89,8 +87,8 @@ public class ExcelDataConfig extends Model{
 
             );
          oldBranch.save();
-         System.out.println("--------------------------------------------------"+oldBranch.Company_Name+"--------------------------------------------------------");
-       }
+        // newBranch.add(oldBranch);
+         }
      
 
 
