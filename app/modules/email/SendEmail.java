@@ -48,12 +48,12 @@ public class SendEmail {
                 .setPassword(password);
 
         List<String> emailList = getEmails();
-        for (int i = 0; i < emailList.size(); i++) {
+      //  for (int i = 0; i < emailList.size(); i++) {
 
             MailMessage message = new MailMessage()
                     .setSubject(subject)
                     .setFrom(from)
-                    .setTo(emailList.get(i))
+                    .setTo(emailList)
                     //.setAttachment()
                     // .setCc("Another User <another@example.net>")
                     .setText(body);
@@ -77,8 +77,8 @@ public class SendEmail {
             });
           //  generateEmailReport(from,emailList,emailDelivered,);
 
-        }
-       // logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
+       // }
+        logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
 
     }
 
@@ -119,7 +119,7 @@ public class SendEmail {
 
 
         }
-        //logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
+        logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
 
     }
 
@@ -130,11 +130,10 @@ public class SendEmail {
         List<Branch> brlist=Branch.find.all();
         List<String> emails=new ArrayList<String>();
         for(int i=0;i<brlist.size();i++){
-        String email=brlist.get(i).getEmail_1();
+        String email=brlist.get(i).getEmail_2();
         if(email.length()>4){
             emails.add(email);
-        logger.info("----------------------------------------------- Email |{}|", email);
-
+        System.out.println(email);
         }
     }
         /*
@@ -147,7 +146,7 @@ public class SendEmail {
             return null;
 
         }
-       // logger.info("-----------------------------------------------Emails | {} |", emails);
+        logger.info("-----------------------------------------------Emails | {} |", emails);
 
 
         return emails;
