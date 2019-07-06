@@ -102,7 +102,7 @@ public class ExcelDataConfig {
 
 
     }
-
+  @play.db.ebean.Transactional
     public static void readExcelLeaders(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -148,7 +148,7 @@ public class ExcelDataConfig {
 
 
     }
-
+  @play.db.ebean.Transactional
     public static void importExcelPersonsData(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -193,7 +193,7 @@ public class ExcelDataConfig {
 
 
     }
-
+  @play.db.ebean.Transactional
     public static void importExcelCorporateEmails(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -230,7 +230,7 @@ public class ExcelDataConfig {
 
 
     }
-
+  @play.db.ebean.Transactional
     public static void importExcelIndividualEmails(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -266,7 +266,7 @@ public class ExcelDataConfig {
         }
 
     }
-
+  @play.db.ebean.Transactional
     public static void importExcelIndividualPhoneNumbers(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -303,7 +303,7 @@ public class ExcelDataConfig {
         }
 
     }
-
+  @play.db.ebean.Transactional
     public static void importExcelPersonsByRegion(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
