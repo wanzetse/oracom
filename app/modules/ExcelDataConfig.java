@@ -115,73 +115,20 @@ public class ExcelDataConfig {
 
         XSSFRow row;
         for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
+            Leaders leader = new Leaders(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)),
+            getSheetvalue(sheet.getRow(i).getCell(5)),
+            getSheetvalue(sheet.getRow(i).getCell(6)),
+            getSheetvalue(sheet.getRow(i).getCell(7)),
+            getSheetvalue(sheet.getRow(i).getCell(8))
+            
 
 
-            String fullNames;
-
-            if (row.getCell(0) == null) {
-                fullNames = "null";
-
-            } else {
-
-                fullNames = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-
-            String Position;
-
-            if (row.getCell(1) == null) {
-                Position = "null";
-
-            } else {
-                Position = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String status;
-
-            if (row.getCell(2) == null) {
-                status = "null";
-            } else {
-                status = formatter.formatCellValue(row.getCell(2));
-            }
-
-            String leaderCounty;
-
-            if (row.getCell(3) == null) {
-                leaderCounty = "null";
-            } else {
-                leaderCounty = formatter.formatCellValue(row.getCell(3));
-            }
-
-            String leaderConstituency;
-
-            if (row.getCell(4) == null) {
-                leaderConstituency = "null";
-            } else {
-                leaderConstituency = formatter.formatCellValue(row.getCell(4)).trim();
-            }
-
-            String leaderWard;
-
-            if (row.getCell(5) == null) {
-                leaderWard = "null";
-            } else {
-                leaderWard = formatter.formatCellValue(row.getCell(5)).trim();
-            }
-
-            String leaderComments;
-
-            if (row.getCell(6) == null) {
-                leaderComments = "null";
-            } else {
-                leaderComments = formatter.formatCellValue(row.getCell(6));
-            }
-
-
-            Leaders leader = new Leaders(fullNames, Position, status, leaderCounty, leaderConstituency, leaderWard, leaderComments,
-                    createdBy, dateCreated);
+                );
 
             leader.save();
 
