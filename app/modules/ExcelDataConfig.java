@@ -22,10 +22,10 @@ public class ExcelDataConfig {
     public static HSSFWorkbook wb;
     public static HSSFSheet sheet;
 
-   /* public static String[] sheetColumns = {"Company_Name", "Company_Category", "Company_Subcategory", "Email_1", "Email_2",
+    public static String[] sheetColumns = {"Company_Name", "Company_Category", "Company_Subcategory", "Email_1", "Email_2",
             "Phone_1", "Phone_2", "Website", "County", "Town", "Street_Name", "Building", "Latitude",
             "Longitude", "companyBranch", "Status", "Services", "Comments", "CreatedBy", "DateCreated"
-    };*/
+    };
 
     public ExcelDataConfig(String excelPath) {
         try {
