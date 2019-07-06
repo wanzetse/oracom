@@ -48,12 +48,12 @@ public class SendEmail {
                 .setPassword(password);
 
         List<String> emailList = getEmails();
-      //  for (int i = 0; i < emailList.size(); i++) {
+       for (int i = 0; i < emailList.size(); i++) {
 
             MailMessage message = new MailMessage()
                     .setSubject(subject)
                     .setFrom(from)
-                    .setTo(emailList)
+                    .setTo(emailList.get(i))
                     //.setAttachment()
                     // .setCc("Another User <another@example.net>")
                     .setText(body);
@@ -77,7 +77,7 @@ public class SendEmail {
             });
           //  generateEmailReport(from,emailList,emailDelivered,);
 
-       // }
+       }
         logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
 
     }
