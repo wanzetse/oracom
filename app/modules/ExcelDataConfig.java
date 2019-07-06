@@ -161,103 +161,21 @@ public class ExcelDataConfig {
 
         XSSFRow row;
         for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
-
-
-            String company;
-
-            if (row.getCell(0) == null) {
-                company = "null";
-
-            } else {
-
-                company = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-            String fullNames;
-
-            if (row.getCell(1) == null) {
-                fullNames = "null";
-            } else {
-
-                fullNames = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String Email1;
-
-            if (row.getCell(2) == null) {
-                Email1 = "null";
-
-            } else {
-                Email1 = formatter.formatCellValue(row.getCell(2));
-            }
-
-            String Email2;
-
-            if (row.getCell(3) == null) {
-                Email2 = "null";
-            } else {
-                Email2 = formatter.formatCellValue(row.getCell(3));
-            }
-
-            String Phone1;
-
-            if (row.getCell(4) == null) {
-                Phone1 = "null";
-            } else {
-                Phone1 = formatter.formatCellValue(row.getCell(4));
-            }
-
-            String Phone2;
-
-            if (row.getCell(5) == null) {
-                Phone2 = "null";
-            } else {
-                Phone2 = formatter.formatCellValue(row.getCell(5)).trim();
-            }
-
-            String Position;
-
-            if (row.getCell(6) == null) {
-                Position = "null";
-            } else {
-                Position = formatter.formatCellValue(row.getCell(6));
-            }
-            String SideHustle;
-
-            if (row.getCell(7) == null) {
-                SideHustle = "null";
-            } else {
-                SideHustle = formatter.formatCellValue(row.getCell(7));
-            }
-
-            String Sex;
-
-            if (row.getCell(8) == null) {
-                Sex = "null";
-            } else {
-                Sex = formatter.formatCellValue(row.getCell(8));
-            }
-
-
-            String Status;
-
-            if (row.getCell(9) == null) {
-                Status = "null";
-            } else {
-                Status = formatter.formatCellValue(row.getCell(9));
-            }
-            String Comments;
-
-            if (row.getCell(10) == null) {
-                Comments = "null";
-            } else {
-                Comments = formatter.formatCellValue(row.getCell(10));
-            }
-
-            HeadOffice person = new HeadOffice(company, fullNames, Email1, Email2,
-                    Phone1, Phone2, Position, SideHustle, Sex, Status, Comments, dateCreated, createdBy);
+             HeadOffice person = new HeadOffice(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)),
+            getSheetvalue(sheet.getRow(i).getCell(5)),
+            getSheetvalue(sheet.getRow(i).getCell(6)),
+            getSheetvalue(sheet.getRow(i).getCell(7)),
+            getSheetvalue(sheet.getRow(i).getCell(8)),
+            getSheetvalue(sheet.getRow(i).getCell(9)),
+            getSheetvalue(sheet.getRow(i).getCell(10)),
+            getSheetvalue(sheet.getRow(i).getCell(11)),
+            getSheetvalue(sheet.getRow(i).getCell(12))
+            );
 
             person.save();
 
@@ -287,41 +205,14 @@ public class ExcelDataConfig {
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
 
         XSSFRow row;
-        for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
+        for (int i = 1; i < sheet.getLastRowNum(); i++) {  //
 
-
-            String email;
-
-            if (row.getCell(0) == null) {
-                email = "null";
-
-            } else {
-
-                email = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-            String Description;
-
-            if (row.getCell(1) == null) {
-                Description = "null";
-            } else {
-
-                Description = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String Comments;
-
-            if (row.getCell(2) == null) {
-                Comments = "null";
-
-            } else {
-                Comments = formatter.formatCellValue(row.getCell(2));
-            }
-
-            CorporateEmails corporateEmails = new CorporateEmails(email, Description, Comments,
-                    createdBy, dateCreated);
+            CorporateEmails corporateEmails = new CorporateEmails(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)));
 
             corporateEmails.save();
 
@@ -349,43 +240,16 @@ public class ExcelDataConfig {
 
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
-
-        XSSFRow row;
-        for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
+        
 
 
-            String email;
-
-            if (row.getCell(0) == null) {
-                email = "null";
-
-            } else {
-
-                email = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-            String Description;
-
-            if (row.getCell(1) == null) {
-                Description = "null";
-            } else {
-
-                Description = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String Comments;
-
-            if (row.getCell(2) == null) {
-                Comments = "null";
-
-            } else {
-                Comments = formatter.formatCellValue(row.getCell(2));
-            }
-
-            IndividualEmails individualEmails = new IndividualEmails(email, Description, Comments,
-                    createdBy, dateCreated);
+         for (int i = 1; i < sheet.getLastRowNum(); i++) { 
+            IndividualEmails individualEmails = new IndividualEmails(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)));
 
             individualEmails.save();
 
@@ -415,40 +279,14 @@ public class ExcelDataConfig {
 
         XSSFRow row;
         for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
-
-
-            String phonNumber;
-
-            if (row.getCell(0) == null) {
-                phonNumber = "null";
-
-            } else {
-
-                phonNumber = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-            String Status;
-
-            if (row.getCell(1) == null) {
-                Status = "null";
-            } else {
-
-                Status = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String Comments;
-
-            if (row.getCell(2) == null) {
-                Comments = "null";
-
-            } else {
-                Comments = formatter.formatCellValue(row.getCell(2));
-            }
-
-            Phones phoneNumbers = new Phones(phonNumber, Status, Comments,
-                    createdBy, dateCreated);
+            
+            Phones phoneNumbers = new Phones(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4))
+                );
 
             phoneNumbers.save();
 
@@ -478,94 +316,20 @@ public class ExcelDataConfig {
 
         XSSFRow row;
         for (int i = 1; i < sheet.getLastRowNum(); i++) {  //points to the starting of excel i.e excel first row
-            row = sheet.getRow(i);  //sheet number
-
-
-            String phonNumber;
-
-            if (row.getCell(0) == null) {
-                phonNumber = "null";
-
-            } else {
-
-                phonNumber = formatter.formatCellValue(row.getCell(0));
-
-            }   //else copies cell data to name variable
-
-            String Surname;
-
-            if (row.getCell(1) == null) {
-                Surname = "null";
-            } else {
-
-                Surname = formatter.formatCellValue(row.getCell(1));
-            }
-
-            String Othernames;
-
-            if (row.getCell(2) == null) {
-                Othernames = "null";
-
-            } else {
-                Othernames = formatter.formatCellValue(row.getCell(2));
-            }
-            String CountyName;
-
-            if (row.getCell(3) == null) {
-                CountyName = "null";
-
-            } else {
-                CountyName = formatter.formatCellValue(row.getCell(3));
-            }
-            String Constituency_name;
-
-            if (row.getCell(4) == null) {
-                Constituency_name = "null";
-
-            } else {
-                Constituency_name = formatter.formatCellValue(row.getCell(4));
-            }
-            String WardName;
-
-            if (row.getCell(5) == null) {
-                WardName = "null";
-
-            } else {
-                WardName = formatter.formatCellValue(row.getCell(5));
-            }
-            String PollingName;
-
-            if (row.getCell(6) == null) {
-                PollingName = "null";
-
-            } else {
-                PollingName = formatter.formatCellValue(row.getCell(6));
-            }
-
-            String Email;
-            if (row.getCell(7) == null) {
-                Email = "null";
-
-            } else {
-                Email = formatter.formatCellValue(row.getCell(7));
-            }
-            String Gender;
-            if (row.getCell(8) == null) {
-                Gender = "null";
-
-            } else {
-                Gender = formatter.formatCellValue(row.getCell(8));
-            }
-            String Comments;
-            if (row.getCell(9) == null) {
-                Comments = "null";
-
-            } else {
-                Comments = formatter.formatCellValue(row.getCell(9));
-            }
-
-            PersonsByRegion persons = new PersonsByRegion(phonNumber, Surname, Othernames, CountyName, Constituency_name, WardName,
-                    PollingName, Email, Gender, Comments, createdBy, dateCreated);
+            PersonsByRegion persons = new PersonsByRegion(
+            getSheetvalue(sheet.getRow(i).getCell(0)),
+            getSheetvalue(sheet.getRow(i).getCell(1)),
+            getSheetvalue(sheet.getRow(i).getCell(2)),
+            getSheetvalue(sheet.getRow(i).getCell(3)),
+            getSheetvalue(sheet.getRow(i).getCell(4)),
+            getSheetvalue(sheet.getRow(i).getCell(5)),
+            getSheetvalue(sheet.getRow(i).getCell(6)),
+            getSheetvalue(sheet.getRow(i).getCell(7)),
+            getSheetvalue(sheet.getRow(i).getCell(8)),
+            getSheetvalue(sheet.getRow(i).getCell(9)),
+            getSheetvalue(sheet.getRow(i).getCell(10)),
+            getSheetvalue(sheet.getRow(i).getCell(11))
+            );
 
             persons.save();
 
