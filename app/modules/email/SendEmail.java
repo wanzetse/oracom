@@ -130,9 +130,10 @@ public class SendEmail {
         List<Branch> brlist=Branch.find.all();
         List<String> emails=new ArrayList<String>();
         for(int i=0;i<brlist.size();i++){
-        String email=brlist.get(i).getEmail_2();
+        String email=brlist.get(i).Email_2;
         if(email.length()>4){
             emails.add(email);
+            System.out.println("==================================================="+email+"=========================================");
         
         }
     }
@@ -154,11 +155,21 @@ public class SendEmail {
     }
 
     private List<String> getPersonEmails() {
-        List<String> emails = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Email_1").findSingleAttributeList();
+        //List<String> emails = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Email_1").findSingleAttributeList();
         /*
         List<String> emails =
                 Branch.finder.query().where().startsWith("Company_Name","a").select("Email_2").findSingleAttributeList();
                 */
+
+        List<Branch> brlist=Branch.find.all();
+        List<String> emails=new ArrayList<String>();
+        for(int i=0;i<brlist.size();i++){
+        String email=brlist.get(i).Email_1;
+        if(email.length()>4){
+            emails.add(email);
+        
+        }
+    }
 
         if (emails.isEmpty()) {
 
