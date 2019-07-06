@@ -9,3 +9,5 @@ out
 /.settings
 /.gradle
 /RUNNING_PID
+/.vertx
+test
