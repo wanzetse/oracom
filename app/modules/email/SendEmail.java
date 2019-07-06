@@ -133,7 +133,7 @@ public class SendEmail {
         String email=brlist.get(i).Email_2;
         if(email.length()>4){
             emails.add(email);
-            System.out.println("==================================================="+email+"=========================================");
+            //System.out.println("==================================================="+email+"=========================================");
         
         }
     }
