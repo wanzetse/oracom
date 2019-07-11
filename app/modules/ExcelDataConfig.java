@@ -61,6 +61,7 @@ public class ExcelDataConfig {
 
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
+        List<Branch> newBranch=new ArrayList<>();
 
        for(int i=0;i<sheet.getLastRowNum();i++){
          Branch oldBranch=new Branch(
@@ -86,11 +87,13 @@ public class ExcelDataConfig {
             getSheetvalue(sheet.getRow(i).getCell(19))
 
             );
-         oldBranch.save();
-        // newBranch.add(oldBranch);
+         //oldBranch.save();
+        newBranch.add(oldBranch);
          }
      
-
+            Ebean.beginTransaction();
+            Ebean.saveAll(oldBusinesses);
+            Ebean.commitTransaction();
 
         try {
 
