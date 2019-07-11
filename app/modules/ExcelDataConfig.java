@@ -2,6 +2,7 @@ package modules;
 import javax.persistence.*;
 import controllers.BranchesController;
 import models.*;
+import io.ebean.Ebean;
 import java.util.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -85,14 +86,13 @@ public class ExcelDataConfig {
             getSheetvalue(sheet.getRow(i).getCell(17)),
             getSheetvalue(sheet.getRow(i).getCell(18)),
             getSheetvalue(sheet.getRow(i).getCell(19))
-
-            );
+ );
          //oldBranch.save();
         newBranch.add(oldBranch);
          }
      
             Ebean.beginTransaction();
-            Ebean.saveAll(oldBusinesses);
+            Ebean.saveAll(newBranch);
             Ebean.commitTransaction();
 
         try {
