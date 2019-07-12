@@ -1,57 +1,32 @@
 function GetSelected() {
-        /* var ary = [];
-        $(function () {
-            $('.jsgrid-table tr').each(function (a, b) {
-                var name = $('.ui-checkboxradio ui-helper-hidden-accessible', a).text();
-                var value = $('.jsgrid-cell', b).text()+"   ";
-              
-                
-                ary.push({ Name: name, Value: value });
-               
-            });
-            alert(JSON.stringify( ary));
-        });
-
+    
    var table=document.getElementsByClassName("jsgrid-table")[1];
    table.id="jt";
-   var arrData=[];
+   var emails=[];
    // loop over each table row (tr)
    $("#jt tr").each(function(){
         var currentRow=$(this);
     
-        var col1_value=currentRow.find("td:eq(0)").text();
-        var col2_value=currentRow.find("td:eq(1)").value;
-        var col3_value=currentRow.find("td:eq(2)").text();
+        //var col1_value=currentRow.find("td:eq(0)").text();
+        var col2_value=currentRow.find("td:eq(1)");
+        document.write("<p>"+JSON.stringify(col2_value)+"</p> <h2>end</h2>");
+        var emai=currentRow.find("td:eq(6)").text();
+        if(emai.length>4 )
+        
+        
+{
+        var email={};
+        email.email=emai;
 
-         var obj={};
-        obj.col1=col1_value;
-        obj.col2=col2_value;
-        obj.col3=col3_value;
-        arrData.push(obj);
+        
+        emails.push(email);}
    });
     
-    var jsondt=JSON.stringify(arrData);
+    var jsondt=JSON.stringify(emails);
     alert(jsondt);
 
-}*/
+}
 
-$('.chk').change(function () {
-
-  if($(this).is(':checked'))
-
-  {
-
-    $(this).closest('tr').find('td').each(
-
-    function (i) {
-
-      alert($(this).text());
-
-    });
-
-  }
-
-});
 
 
 $(document).ready(function () {
