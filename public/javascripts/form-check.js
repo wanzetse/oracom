@@ -44,7 +44,9 @@ $(document).ready(function () {
                 }
             }
         };
+
         var data = JSON.stringify({"username": username, "password": password});
+        alert(data);
         xhr.send(data);
 
     });

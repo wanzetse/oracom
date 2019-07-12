@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    $('#emailForm').validate({ // initialize the plugin
+    $('#emailForm').validate({
+     // initialize the plugin
+     debug:true,
         rules: {
             subjectTextField: {
                 required: true
@@ -12,12 +14,8 @@ $(document).ready(function () {
             },
             fromTextField: {
                 required: true,
-                validate: {
-                    message: "Please enter a valid email address", validator: function (value) {
-                        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                        return re.test(String(value).toLowerCase());
-                    }
-                }
+                email:true
+
             },
             passwordTextField: {
                 required: true,

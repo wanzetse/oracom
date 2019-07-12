@@ -147,38 +147,35 @@ public class BranchesController extends Controller {
     }
 
 
-   // @BodyParser.Of(BodyParser.Json.class)
+    @BodyParser.Of(BodyParser.Json.class)
     public CompletionStage<Result> sendEmail() {
 
         JsonNode json = request().body().asJson();
         ObjectNode result = Json.newObject();
-        DynamicForm emaidata=formFactory.form().bindFromRequest();
-        emailFrom=emaidata.get("fromTextField");
-         emailPassword=emaidata.get("passwordTextField");
-          emailSubject=emaidata.get("subjectTextField");
-           emailBody=emaidata.get("bodyTextField");
-/*
+        
+ 
         emailFrom = json.get("fromTextField").asText();
         emailPassword = json.get("passwordTextField").asText();
         emailSubject = json.get("subjectTextField").asText();
         emailBody = json.get("bodyTextField").asText();
 
-/*
+
         if (emailSubject.equals(null) || emailBody.equals(null) || emailFrom.equals(null) || emailPassword.equals(null)) {
 
             result.put("result", "subject or body is empty");
 
             return CompletableFuture.completedFuture(ok(result));
         }
-*/
-        result.put("result", "Successful!");
+
+        result.put("result", "Success!");
 
         sendEmail = new SendEmail();
         sendEmail.sendBulkEmail(emailFrom, emailPassword, emailSubject, emailBody);
 
         logger.info("-----------------------------------------------Subject |{}| Body |{}|", emailSubject, emailBody);
 
-        return CompletableFuture.completedFuture(redirect(routes.BranchesController.showBranches()));
+       // return CompletableFuture.completedFuture(redirect(routes.BranchesController.showBranches()));
+        return CompletableFuture.completedFuture(ok(result));
     }
 
     private long operateOnTempFile(File file) throws IOException {

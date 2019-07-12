@@ -1,4 +1,20 @@
+function GetSelected() {
+          var ary = [];
+        $(function () {
+            $('.jsgrid-table tr').each(function (a, b) {
+                var name = $('.ui-checkboxradio', b).text();
+                var value = $('.jsgrid-cell', b).text();
+                
+                ary.push({ Name: name, Value: value });
+               
+            });
+            alert(JSON.stringify( ary));
+        });
+    }
+
+
 $(document).ready(function () {
+
     $("#emailForm").submit(function (event) {
         event.preventDefault(); //prevent default action
         var post_url = $(this).attr("action"); //get form action url
@@ -24,11 +40,13 @@ $(document).ready(function () {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                
                 var json = JSON.parse(xhr.responseText);
                 console.log(json.result);
                 indeterminateProgress.end();
 
                 if (json.result === "Success!") {
+
                     indeterminateProgress.end();
                     Materialize.toast("Email Sent Successfully!", 3000, "rounded");
                 } else if (json.result === "empty") {
@@ -49,9 +67,19 @@ $(document).ready(function () {
             "passwordTextField": passwordTextField
 
         });
+        GetSelected();
+        
         xhr.send(data);
+
 
     });
 
 
+
+
 });
+
+
+
+    // code to read selected table row cell data (values).
+   

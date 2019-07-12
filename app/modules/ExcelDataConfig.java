@@ -4,6 +4,7 @@ import controllers.BranchesController;
 import models.*;
 import io.ebean.Ebean;
 import java.util.*;
+import io.ebean.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -52,7 +53,8 @@ public class ExcelDataConfig {
             }
             return s;
         }
-    @play.db.ebean.Transactional
+
+@play.db.ebean.Transactional
     public static void readExcel(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -89,13 +91,17 @@ public class ExcelDataConfig {
  );
          //oldBranch.save();
         newBranch.add(oldBranch);
+        System.out.println(oldBranch.Company_Name);
          }
      
-            Ebean.beginTransaction();
-            Ebean.saveAll(newBranch);
-            Ebean.commitTransaction();
+           EbeanServer server = Ebean.getServer(null);
 
         try {
+            Transaction transaction=server.beginTransaction();
+            transaction.setBatchMode(true);
+            transaction.setBatchSize(500);
+            server.saveAll(newBranch);
+            transaction.commit();
 
             file.close();
 
