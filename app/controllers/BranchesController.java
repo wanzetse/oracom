@@ -160,7 +160,7 @@ public class BranchesController extends Controller {
         emailBody = json.get("bodyTextField").asText();
 
 
-        if (emailSubject.equals(null) || emailBody.equals(null) || emailFrom.equals(null) || emailPassword.equals(null)) {
+        if (emailSubject.equals(null) || emailBody.equals(null) || emailFrom.equals(null) || emailPassword.length()<5) {
 
             result.put("result", "subject or body is empty");
 
@@ -436,7 +436,7 @@ public class BranchesController extends Controller {
         return CompletableFuture.completedFuture(ok());
     }
 
-    // @Security.Authenticated(Secured.class)
+     @Security.Authenticated(Secured.class)
     public CompletionStage<Result> loadBranches() {
 
         Executor myEc = HttpExecution.fromThread((Executor) esbExecutionContext);

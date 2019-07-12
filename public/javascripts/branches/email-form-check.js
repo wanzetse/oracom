@@ -1,9 +1,9 @@
 function GetSelected() {
-          var ary = [];
+        /* var ary = [];
         $(function () {
             $('.jsgrid-table tr').each(function (a, b) {
                 var name = $('.ui-checkboxradio ui-helper-hidden-accessible', a).text();
-                var value = $('.jsgrid-cell', b).text();
+                var value = $('.jsgrid-cell', b).text()+"   ";
               
                 
                 ary.push({ Name: name, Value: value });
@@ -11,8 +11,24 @@ function GetSelected() {
             });
             alert(JSON.stringify( ary));
         });
-    }
+*/
 
+    var myTab = document.getElementsByClassName('jsgrid-table');
+         var data="";
+        // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
+        for (var i = 1; i < myTab[0].rows.length; i++) {
+
+            // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+            var objCells = myTab[0].rows.item(i).cells;
+
+            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
+            for (var j = 0; j < objCells.length; j++) {
+                data = data + ' ' + objCells.item(j).value;
+            }
+            alert(data);     // ADD A BREAK (TAG).
+        }
+
+}
 
 $(document).ready(function () {
 
