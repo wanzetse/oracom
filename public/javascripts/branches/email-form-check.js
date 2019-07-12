@@ -11,24 +11,48 @@ function GetSelected() {
             });
             alert(JSON.stringify( ary));
         });
-*/
 
-    var myTab = document.getElementsByClassName('jsgrid-table');
-         var data="";
-        // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
-        for (var i = 1; i < myTab[0].rows.length; i++) {
+   var table=document.getElementsByClassName("jsgrid-table")[1];
+   table.id="jt";
+   var arrData=[];
+   // loop over each table row (tr)
+   $("#jt tr").each(function(){
+        var currentRow=$(this);
+    
+        var col1_value=currentRow.find("td:eq(0)").text();
+        var col2_value=currentRow.find("td:eq(1)").value;
+        var col3_value=currentRow.find("td:eq(2)").text();
 
-            // GET THE CELLS COLLECTION OF THE CURRENT ROW.
-            var objCells = myTab[0].rows.item(i).cells;
+         var obj={};
+        obj.col1=col1_value;
+        obj.col2=col2_value;
+        obj.col3=col3_value;
+        arrData.push(obj);
+   });
+    
+    var jsondt=JSON.stringify(arrData);
+    alert(jsondt);
 
-            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
-            for (var j = 0; j < objCells.length; j++) {
-                data = data + ' ' + objCells.item(j).value;
-            }
-            alert(data);     // ADD A BREAK (TAG).
-        }
+}*/
 
-}
+$('.chk').change(function () {
+
+  if($(this).is(':checked'))
+
+  {
+
+    $(this).closest('tr').find('td').each(
+
+    function (i) {
+
+      alert($(this).text());
+
+    });
+
+  }
+
+});
+
 
 $(document).ready(function () {
 
