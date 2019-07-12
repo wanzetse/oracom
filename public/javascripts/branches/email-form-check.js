@@ -2,8 +2,9 @@ function GetSelected() {
           var ary = [];
         $(function () {
             $('.jsgrid-table tr').each(function (a, b) {
-                var name = $('.ui-checkboxradio', b).text();
+                var name = $('.ui-checkboxradio ui-helper-hidden-accessible', a).text();
                 var value = $('.jsgrid-cell', b).text();
+              
                 
                 ary.push({ Name: name, Value: value });
                
