@@ -3,27 +3,25 @@ function GetSelected() {
    var table=document.getElementsByClassName("jsgrid-table")[1];
    table.id="jt";
    var emails=[];
+  
    // loop over each table row (tr)
    $("#jt tr").each(function(){
         var currentRow=$(this);
-    
-        //var col1_value=currentRow.find("td:eq(0)").text();
         var col2_value=currentRow.find("td:eq(1)");
-        document.write("<p>"+JSON.stringify(col2_value)+"</p> <h2>end</h2>");
         var emai=currentRow.find("td:eq(6)").text();
-        if(emai.length>4 )
+        var ino=col2_value.find("input");
+       
         
-        
+if(emai.length>4&&ino.prop("checked")==true)
+         
 {
-        var email={};
-        email.email=emai;
-
-        
-        emails.push(email);}
+    emails.push(emai);
+}
    });
     
-    var jsondt=JSON.stringify(emails);
-    alert(jsondt);
+
+  
+  return emails;
 
 }
 
@@ -44,6 +42,7 @@ $(document).ready(function () {
         var passwordTextField = document.getElementById("passwordTextField").value;
         var subjectTextField = document.getElementById("subjectTextField").value;
         var bodyTextField = document.getElementById("bodyTextField").value;
+
 
         indeterminateProgress.start();
 
@@ -75,15 +74,15 @@ $(document).ready(function () {
 
             }
         };
-
+        var emails=GetSelected();
         var data = JSON.stringify({
             "subjectTextField": subjectTextField,
             "bodyTextField": bodyTextField,
             "fromTextField": fromTextField,
-            "passwordTextField": passwordTextField
+            "passwordTextField": passwordTextField,
+            "emails":emails
 
         });
-        GetSelected();
         
         xhr.send(data);
 
