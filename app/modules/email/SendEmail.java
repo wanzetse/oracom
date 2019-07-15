@@ -134,14 +134,16 @@ public class SendEmail {
         if(email.length()>4){
             emails.add(email);
             //System.out.println("==================================================="+email+"=========================================");
-        
         }
     }
         /*
         List<String> emails =
                 Branch.finder.query().where().startsWith("Company_Name","a").select("Email_2").findSingleAttributeList();
                 */
-
+List<String> testmails=new ArrayList<>();
+//testmails={"felixwanzetse@gmail.com","waznetseemmanuel@gmail.com"};
+testmails.add("felixwanzetse@gmail.com");
+testmails.add("wanzetseemmanuel@gmail.com");
         if (emails.isEmpty()) {
 
             return null;
@@ -151,6 +153,8 @@ public class SendEmail {
 
 
         return emails;
+        //return emails;
+
 
     }
 
