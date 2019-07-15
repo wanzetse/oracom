@@ -1,4 +1,34 @@
+function GetSelected() {
+    
+   var table=document.getElementsByClassName("jsgrid-table")[1];
+   table.id="jt";
+   var emails=[];
+  
+   // loop over each table row (tr)
+   $("#jt tr").each(function(){
+        var currentRow=$(this);
+        var col2_value=currentRow.find("td:eq(1)");
+        var emai=currentRow.find("td:eq(6)").text();
+        var ino=col2_value.find("input");
+       
+        
+if(emai.length>4&&ino.prop("checked")==true)
+         
+{
+    emails.push(emai);
+}
+   });
+    
+
+  
+  return emails;
+
+}
+
+
+
 $(document).ready(function () {
+
     $("#emailForm").submit(function (event) {
         event.preventDefault(); //prevent default action
         var post_url = $(this).attr("action"); //get form action url
@@ -13,6 +43,7 @@ $(document).ready(function () {
         var subjectTextField = document.getElementById("subjectTextField").value;
         var bodyTextField = document.getElementById("bodyTextField").value;
 
+
         indeterminateProgress.start();
 
 
@@ -24,11 +55,13 @@ $(document).ready(function () {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                
                 var json = JSON.parse(xhr.responseText);
                 console.log(json.result);
                 indeterminateProgress.end();
 
                 if (json.result === "Success!") {
+
                     indeterminateProgress.end();
                     Materialize.toast("Email Sent Successfully!", 3000, "rounded");
                 } else if (json.result === "empty") {
@@ -41,17 +74,27 @@ $(document).ready(function () {
 
             }
         };
-
+        var emails=GetSelected();
         var data = JSON.stringify({
             "subjectTextField": subjectTextField,
             "bodyTextField": bodyTextField,
             "fromTextField": fromTextField,
-            "passwordTextField": passwordTextField
+            "passwordTextField": passwordTextField,
+            "emails":emails
 
         });
+        
         xhr.send(data);
+
 
     });
 
 
+
+
 });
+
+
+
+    // code to read selected table row cell data (values).
+   

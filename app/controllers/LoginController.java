@@ -63,7 +63,7 @@ public class LoginController extends Controller {
 
     }
 
-    //@Security.Authenticated(Secured.class)
+    @Security.Authenticated(Secured.class)
     public Result dashboard() {
 
         Form<User> loginForm = formFactory.form(User.class);
@@ -219,11 +219,11 @@ public class LoginController extends Controller {
 
             session("Username", username);
             ObjectNode result = Json.newObject();
-            //result.put("login", "success");
+            result.put("login", "success");
             result.put("responseMsg", "success");
             session("branch", "karatu");
             session("RoleName", "root");
-            //result.put("response", "Login Successful");
+            result.put("response", "Login Successful");
 
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++ Profile |{}|", session().get("RoleName"));
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++ LOGIN FAILED for   |{}|", json);

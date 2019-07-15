@@ -60,6 +60,7 @@ public class BranchesController extends Controller {
     public String emailPassword;
     public String emailSubject;
     public String emailBody;
+    public String emails;
 
     public static String SENDER_ID;
     public static String senderIdUsername;
@@ -147,38 +148,40 @@ public class BranchesController extends Controller {
     }
 
 
-   // @BodyParser.Of(BodyParser.Json.class)
+    @BodyParser.Of(BodyParser.Json.class)
     public CompletionStage<Result> sendEmail() {
 
         JsonNode json = request().body().asJson();
         ObjectNode result = Json.newObject();
-        DynamicForm emaidata=formFactory.form().bindFromRequest();
-        emailFrom=emaidata.get("fromTextField");
-         emailPassword=emaidata.get("passwordTextField");
-          emailSubject=emaidata.get("subjectTextField");
-           emailBody=emaidata.get("bodyTextField");
-/*
+        emails=json.get("emails").toString();
+        String e1=emails.replaceAll("\"","");
+         String e2=e1.replace("[","");
+        String e3=e2.replace("]","");
+        String[] emaills=e3.split(",");
         emailFrom = json.get("fromTextField").asText();
         emailPassword = json.get("passwordTextField").asText();
         emailSubject = json.get("subjectTextField").asText();
         emailBody = json.get("bodyTextField").asText();
+      
+      
 
-/*
-        if (emailSubject.equals(null) || emailBody.equals(null) || emailFrom.equals(null) || emailPassword.equals(null)) {
+
+        if (emailSubject.equals(null) || emailBody.equals(null) || emailFrom.equals(null) || emailPassword.length()<5) {
 
             result.put("result", "subject or body is empty");
 
             return CompletableFuture.completedFuture(ok(result));
         }
-*/
-        result.put("result", "Successful!");
+
+        result.put("result", "Success!");
 
         sendEmail = new SendEmail();
-        sendEmail.sendBulkEmail(emailFrom, emailPassword, emailSubject, emailBody);
+        sendEmail.sendBulkEmail1(emailFrom, emailPassword, emailSubject, emailBody,emaills);
 
-        logger.info("-----------------------------------------------Subject |{}| Body |{}|", emailSubject, emailBody);
+        logger.info("-----------------------------------------------Subject |{}| Body |{}| emails |{}|", emailSubject, emailBody,emails);
 
-        return CompletableFuture.completedFuture(redirect(routes.BranchesController.showBranches()));
+       // return CompletableFuture.completedFuture(redirect(routes.BranchesController.showBranches()));
+        return CompletableFuture.completedFuture(ok(result));
     }
 
     private long operateOnTempFile(File file) throws IOException {
@@ -439,7 +442,7 @@ public class BranchesController extends Controller {
         return CompletableFuture.completedFuture(ok());
     }
 
-    // @Security.Authenticated(Secured.class)
+     @Security.Authenticated(Secured.class)
     public CompletionStage<Result> loadBranches() {
 
         Executor myEc = HttpExecution.fromThread((Executor) esbExecutionContext);

@@ -27,7 +27,7 @@ public class SendEmail {
     //public sentBy
 
 
-    public void sendBulkEmail(String from, String password, String subject, String body) {
+    public void sendBulkEmail1(String from, String password, String subject, String body,String[] emails) {
 
         MailAttachment attachment = new MailAttachment();
         attachment.setContentType("text/plain");
@@ -47,7 +47,61 @@ public class SendEmail {
                 .setUsername(from)
                 .setPassword(password);
 
-        List<String> emailList = getEmails();
+        
+       for (int i = 0; i < emails.length; i++) {
+
+            MailMessage message = new MailMessage()
+                    .setSubject(subject)
+                    .setFrom(from)
+                    .setTo(emails[i])
+                    //.setAttachment()
+                    // .setCc("Another User <another@example.net>")
+                    .setText(body);
+
+            mailClient = MailClient.createShared(mailVertx, config, "exampleclient");
+
+
+            mailClient.sendMail(message, result -> {
+                if (result.succeeded()) {
+
+                    emailDelivered = true;
+
+                    System.out.println(result.result());
+
+                } else {
+                    emailDelivered = false;
+                    result.cause().printStackTrace();
+                    System.out.println(result.cause());
+
+                }
+            });
+          //  generateEmailReport(from,emailList,emailDelivered,);
+
+       }
+        logger.info("-----------------------------------------------Subject |{}| Body |{}|", subject, body);
+
+    }
+ public void sendBulkEmail(String from, String password, String subject, String body) {
+
+        MailAttachment attachment = new MailAttachment();
+        attachment.setContentType("text/plain");
+        attachment.setData(Buffer.buffer("attachment file"));
+
+        MailAttachment image = new MailAttachment();
+        attachment.setContentType("image/jpeg");
+        attachment.setData(Buffer.buffer("image data"));
+        attachment.setDisposition("inline");
+        //  attachment.setContentId("<image1@example.com>");
+
+
+        MailConfig config = new MailConfig()
+                .setHostname("smtp.gmail.com")
+                .setPort(587)
+                .setStarttls(StartTLSOptions.REQUIRED)
+                .setUsername(from)
+                .setPassword(password);
+
+        List<String> emailList =getEmails();
        for (int i = 0; i < emailList.size(); i++) {
 
             MailMessage message = new MailMessage()

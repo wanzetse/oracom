@@ -2,7 +2,9 @@ package modules;
 import javax.persistence.*;
 import controllers.BranchesController;
 import models.*;
+import io.ebean.Ebean;
 import java.util.*;
+import io.ebean.*;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -51,7 +53,8 @@ public class ExcelDataConfig {
             }
             return s;
         }
-    @play.db.ebean.Transactional
+
+@play.db.ebean.Transactional
     public static void readExcel(File uploadedFile, String createdBy, String dateCreated) throws IOException {
 
 
@@ -61,6 +64,7 @@ public class ExcelDataConfig {
 
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(file);
         XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
+        List<Branch> newBranch=new ArrayList<>();
 
        for(int i=0;i<sheet.getLastRowNum();i++){
          Branch oldBranch=new Branch(
@@ -84,15 +88,20 @@ public class ExcelDataConfig {
             getSheetvalue(sheet.getRow(i).getCell(17)),
             getSheetvalue(sheet.getRow(i).getCell(18)),
             getSheetvalue(sheet.getRow(i).getCell(19))
-
-            );
-         oldBranch.save();
-        // newBranch.add(oldBranch);
+ );
+         //oldBranch.save();
+        newBranch.add(oldBranch);
+        System.out.println(oldBranch.Company_Name);
          }
      
-
+           EbeanServer server = Ebean.getServer(null);
 
         try {
+            Transaction transaction=server.beginTransaction();
+            transaction.setBatchMode(true);
+            transaction.setBatchSize(500);
+            server.saveAll(newBranch);
+            transaction.commit();
 
             file.close();
 
