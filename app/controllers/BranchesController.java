@@ -54,6 +54,7 @@ public class BranchesController extends Controller {
     public static Logger.ALogger logger = Logger.of(BranchesController.class);
 
     public static int recordCount;
+
     public static String responseMsg;
     public static String responseCode;
     public String emailFrom;

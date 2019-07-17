@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table tbbusinesses (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   company_name                  varchar(255),
   company_category              varchar(255),
   company_subcategory           varchar(255),
@@ -25,60 +25,60 @@ create table tbbusinesses (
   comments                      varchar(255),
   created_by                    varchar(255),
   date_created                  varchar(255),
-  selected                      boolean default false not null,
+  selected                      integer(1) default 0 not null,
   ceated_by                     varchar(255),
   constraint pk_tbbusinesses primary key (id)
 );
 
 create table tbcharges (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   branch_code                   varchar(255),
   transaction_code              varchar(255),
   from_amount                   varchar(255),
   to_amount                     varchar(255),
-  is_transaction_fee            boolean default false not null,
+  is_transaction_fee            integer(1) default 0 not null,
   transaction_fee               varchar(255),
   commission_fee                varchar(255),
   trans_glcode                  varchar(255),
-  is_commission_fee             boolean default false not null,
+  is_commission_fee             integer(1) default 0 not null,
   commission_glcode             varchar(255),
   channel                       varchar(255),
   create_date                   varchar(255),
   created_by                    varchar(255),
-  active                        boolean default false not null,
-  approved                      boolean default false not null,
+  active                        integer(1) default 0 not null,
+  approved                      integer(1) default 0 not null,
   approved_date                 varchar(255),
   approved_by                   varchar(255),
   constraint pk_tbcharges primary key (id)
 );
 
 create table tbcorporateemails (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   email                         varchar(255),
   description                   varchar(255),
   comments                      varchar(255),
   created_by                    varchar(255),
   date_created                  varchar(255),
-  selected                      boolean default false not null,
+  selected                      integer(1) default 0 not null,
   constraint pk_tbcorporateemails primary key (id)
 );
 
 create table t_docs (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   business_type                 varchar(255),
-  appln_form                    boolean default false not null,
-  director_id                   boolean default false not null,
-  kra_pin                       boolean default false not null,
-  council_permit                boolean default false not null,
-  business_reg_cert             boolean default false not null,
-  utility_bill                  boolean default false not null,
-  business_photo                boolean default false not null,
-  bank_letter                   boolean default false not null,
-  cancelled_cheque              boolean default false not null,
-  board_resolution              boolean default false not null,
-  cr12                          boolean default false not null,
-  regulatory_authority_letter   boolean default false not null,
-  last_audited_accounts         boolean default false not null,
+  appln_form                    integer(1) default 0 not null,
+  director_id                   integer(1) default 0 not null,
+  kra_pin                       integer(1) default 0 not null,
+  council_permit                integer(1) default 0 not null,
+  business_reg_cert             integer(1) default 0 not null,
+  utility_bill                  integer(1) default 0 not null,
+  business_photo                integer(1) default 0 not null,
+  bank_letter                   integer(1) default 0 not null,
+  cancelled_cheque              integer(1) default 0 not null,
+  board_resolution              integer(1) default 0 not null,
+  cr12                          integer(1) default 0 not null,
+  regulatory_authority_letter   integer(1) default 0 not null,
+  last_audited_accounts         integer(1) default 0 not null,
   created_by                    varchar(255),
   create_date                   varchar(255),
   edited_by                     varchar(255),
@@ -87,26 +87,26 @@ create table t_docs (
 );
 
 create table tbemaildeliveryreports (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   email_from                    varchar(255),
   email_to                      varchar(255),
-  delivered                     boolean default false not null,
+  delivered                     integer(1) default 0 not null,
   sent_by                       varchar(255),
   date_sent                     varchar(255),
   constraint pk_tbemaildeliveryreports primary key (id)
 );
 
 create table tbglaccounts (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   gl_name                       varchar(255),
   gl_code                       varchar(255),
-  is_sacco                      boolean default false not null,
+  is_sacco                      integer(1) default 0 not null,
   branch_code                   varchar(255),
   constraint pk_tbglaccounts primary key (id)
 );
 
 create table tbperson (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   company                       varchar(255),
   full_names                    varchar(255),
   email_1                       varchar(255),
@@ -120,34 +120,34 @@ create table tbperson (
   comments                      varchar(255),
   created_by                    varchar(255),
   date_created                  varchar(255),
-  selected                      boolean default false not null,
+  selected                      integer(1) default 0 not null,
   constraint pk_tbperson primary key (id)
 );
 
 create table tbindividualemails (
-  email_id                      integer auto_increment not null,
+  email_id                      integer not null,
   individual_email              varchar(255),
   individual_description        varchar(255),
   individual_comments           varchar(255),
   individual_created_by         varchar(255),
   individual_date_created       varchar(255),
-  individual_selected           boolean default false not null,
+  individual_selected           integer(1) default 0 not null,
   constraint pk_tbindividualemails primary key (email_id)
 );
 
 create table tbphones (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   individual_phone              varchar(255),
   individual_phone_status       varchar(255),
   individual_phone_comments     varchar(255),
   individual_phone_created_by   varchar(255),
   individual_phone_date_created varchar(255),
-  individual_phone_selected     boolean default false not null,
+  individual_phone_selected     integer(1) default 0 not null,
   constraint pk_tbphones primary key (id)
 );
 
 create table tbleaders (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   full_names                    varchar(255),
   position                      varchar(255),
   status                        varchar(255),
@@ -157,12 +157,12 @@ create table tbleaders (
   leader_comments               varchar(255),
   leader_created_by             varchar(255),
   leader_date_created           varchar(255),
-  selected_leader               boolean default false not null,
+  selected_leader               integer(1) default 0 not null,
   constraint pk_tbleaders primary key (id)
 );
 
 create table tbmerchanttransactions (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   middle_name                   varchar(255),
   last_name                     varchar(255),
@@ -181,7 +181,7 @@ create table tbmerchanttransactions (
 );
 
 create table tbmerchants (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   mid_name                      varchar(255),
   last_name                     varchar(255),
@@ -192,21 +192,21 @@ create table tbmerchants (
   branch                        varchar(255),
   create_date                   varchar(255),
   created_by                    varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approved_date                 varchar(255),
   approved_by                   varchar(255),
   username                      varchar(255),
   password                      varchar(255),
-  is_enabled                    boolean default false not null,
+  is_enabled                    integer(1) default 0 not null,
   enabled_by                    varchar(255),
   enabled_date                  varchar(255),
-  is_deleted                    boolean default false not null,
+  is_deleted                    integer(1) default 0 not null,
   delete_date                   varchar(255),
   delete_by                     varchar(255),
-  is_disabled                   boolean default false not null,
+  is_disabled                   integer(1) default 0 not null,
   disabled_date                 varchar(255),
   disabled_by                   varchar(255),
-  is_first_login                boolean default false not null,
+  is_first_login                integer(1) default 0 not null,
   login_tries                   varchar(255),
   constraint pk_tbmerchants primary key (id)
 );
@@ -217,7 +217,7 @@ create table tbmessage (
 );
 
 create table tbpersonsbyregion (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   person_phone                  varchar(255),
   person_surname                varchar(255),
   person_othernames             varchar(255),
@@ -230,12 +230,12 @@ create table tbpersonsbyregion (
   person_comment                varchar(255),
   person_create_date            varchar(255),
   person_created_by             varchar(255),
-  person_selected               boolean default false not null,
+  person_selected               integer(1) default 0 not null,
   constraint pk_tbpersonsbyregion primary key (id)
 );
 
 create table tbbusinesscategory (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   individual_phone              varchar(255),
   individual_phone_status       varchar(255),
   individual_phone_comments     varchar(255),
@@ -245,48 +245,48 @@ create table tbbusinesscategory (
 );
 
 create table tbproducts (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   product_id                    varchar(255),
   description                   varchar(255),
   product_class                 varchar(255),
   product_code                  varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approve_date                  varchar(255),
   approved_by                   varchar(255),
-  is_delete                     boolean default false not null,
+  is_delete                     integer(1) default 0 not null,
   delete_date                   varchar(255),
   delete_by                     varchar(255),
   constraint pk_tbproducts primary key (id)
 );
 
 create table tbprofiles (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   profile_name                  varchar(255),
   remarks                       varchar(255),
   created_by                    varchar(255),
   date_created                  varchar(255),
-  approved                      boolean default false not null,
-  edit                          boolean default false not null,
+  approved                      integer(1) default 0 not null,
+  edit                          integer(1) default 0 not null,
   edit_date                     varchar(255),
-  edit_approved                 boolean default false not null,
-  deleted                       boolean default false not null,
+  edit_approved                 integer(1) default 0 not null,
+  deleted                       integer(1) default 0 not null,
   delete_date                   varchar(255),
-  delete_approved               boolean default false not null,
+  delete_approved               integer(1) default 0 not null,
   constraint pk_tbprofiles primary key (id)
 );
 
 create table tbsmsdeliveryreports (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   sender_id                     varchar(255),
   sms_to                        varchar(255),
-  delivered                     boolean default false not null,
+  delivered                     integer(1) default 0 not null,
   sent_by                       varchar(255),
   date_sent                     varchar(255),
   constraint pk_tbsmsdeliveryreports primary key (id)
 );
 
 create table tbaccount (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   middle_name                   varchar(255),
   last_name                     varchar(255),
@@ -296,17 +296,17 @@ create table tbaccount (
   balance                       varchar(255),
   created_on                    varchar(255),
   created_by                    varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approve_date                  varchar(255),
   approve_by                    varchar(255),
-  is_disabled                   boolean default false not null,
+  is_disabled                   integer(1) default 0 not null,
   disable_date                  varchar(255),
   disabled_by                   varchar(255),
   constraint pk_tbaccount primary key (id)
 );
 
 create table tbclient (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   middle_name                   varchar(255),
   last_name                     varchar(255),
@@ -320,13 +320,13 @@ create table tbclient (
   idimage                       varchar(255),
   fingerprint                   varchar(255),
   dob                           varchar(255),
-  is_sacco                      boolean default false not null,
+  is_sacco                      integer(1) default 0 not null,
   client_id                     varchar(255),
   constraint pk_tbclient primary key (id)
 );
 
 create table tbcustomer (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   middle_name                   varchar(255),
   last_name                     varchar(255),
@@ -341,26 +341,26 @@ create table tbcustomer (
   fingerprint                   varchar(255),
   created_by                    varchar(255),
   create_date                   varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approved_by                   varchar(255),
   approve_date                  varchar(255),
   constraint pk_tbcustomer primary key (id)
 );
 
 create table tbfloat (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   branch_id                     varchar(255),
   agent_account                 varchar(255),
   trans_type                    varchar(255),
   trans_date                    varchar(255),
-  approved                      boolean default false not null,
+  approved                      integer(1) default 0 not null,
   approved_by                   varchar(255),
   approve_date                  varchar(255),
   constraint pk_tbfloat primary key (id)
 );
 
 create table tbloanproduct (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   description                   varchar(255),
   product_code                  varchar(255),
   max_amount                    varchar(255),
@@ -371,17 +371,17 @@ create table tbloanproduct (
   max_value                     varchar(255),
   max_period                    varchar(255),
   penalty_rate                  varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approve_date                  varchar(255),
   approve_by                    varchar(255),
-  is_deleted                    boolean default false not null,
+  is_deleted                    integer(1) default 0 not null,
   delete_date                   varchar(255),
   deleted_by                    varchar(255),
   constraint pk_tbloanproduct primary key (id)
 );
 
 create table tbloans (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   loan_account                  varchar(255),
   loan_amount                   varchar(255),
   application_date              varchar(255),
@@ -392,20 +392,20 @@ create table tbloans (
   interest_balance              varchar(255),
   customer_phoner               varchar(255),
   loan_status                   varchar(255),
-  is_active                     boolean default false not null,
+  is_active                     integer(1) default 0 not null,
   loan_disbursed                varchar(255),
   interest                      varchar(255),
-  disbursed                     boolean default false not null,
+  disbursed                     integer(1) default 0 not null,
   disburse_date                 varchar(255),
   account_number                varchar(255),
-  is_reversed                   boolean default false not null,
+  is_reversed                   integer(1) default 0 not null,
   reverse_date                  varchar(255),
   reverse_by                    varchar(255),
   constraint pk_tbloans primary key (id)
 );
 
 create table tbsacco (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   sacco_code                    varchar(255),
   sacco_name                    varchar(255),
   brand_name                    varchar(255),
@@ -416,7 +416,7 @@ create table tbsacco (
   create_date                   varchar(255),
   remarks                       varchar(255),
   created_by                    varchar(255),
-  create_approved               boolean default false not null,
+  create_approved               integer(1) default 0 not null,
   create_approved_date          varchar(255),
   create_approved_by            varchar(255),
   updated                       varchar(255),
@@ -430,7 +430,7 @@ create table tbsacco (
 );
 
 create table tbtransactions (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   account_number                varchar(255),
   drcr                          varchar(255),
   transaction_code              varchar(255),
@@ -443,20 +443,20 @@ create table tbtransactions (
 );
 
 create table tbtranscodes (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   trancode                      varchar(255),
   trans_name                    varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approve_date                  varchar(255),
   approve_by                    varchar(255),
-  is_deleted                    boolean default false not null,
+  is_deleted                    integer(1) default 0 not null,
   delete_date                   varchar(255),
   delete_by                     varchar(255),
   constraint pk_tbtranscodes primary key (id)
 );
 
 create table tbusers (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   mid_name                      varchar(255),
   last_name                     varchar(255),
@@ -471,23 +471,23 @@ create table tbusers (
   created_by                    varchar(255),
   date_created                  varchar(255),
   remarks                       varchar(255),
-  create_approved               boolean default false not null,
+  create_approved               integer(1) default 0 not null,
   create_approved_by            varchar(255),
   create_approved_date          varchar(255),
   create_approved_remarks       varchar(255),
-  rejected                      boolean default false not null,
+  rejected                      integer(1) default 0 not null,
   rejected_by                   varchar(255),
   date_rejected                 varchar(255),
-  updated                       boolean default false not null,
+  updated                       integer(1) default 0 not null,
   updated_by                    varchar(255),
   date_updated                  varchar(255),
-  reset_pass                    boolean default false not null,
+  reset_pass                    integer(1) default 0 not null,
   pass_reset_by                 varchar(255),
   pass_reset_date               timestamp,
-  disabled                      boolean default false not null,
+  disabled                      integer(1) default 0 not null,
   disabled_by                   varchar(255),
   disabled_date                 timestamp,
-  deleted                       boolean default false not null,
+  deleted                       integer(1) default 0 not null,
   deleted_by                    varchar(255),
   delete_date                   varchar(255),
   branch_id                     integer,
@@ -496,23 +496,23 @@ create table tbusers (
 );
 
 create table tbroles (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   role_name                     varchar(255),
   remarks                       varchar(255),
   created_by                    varchar(255),
   date_created                  varchar(255),
-  approved                      boolean default false not null,
-  edit                          boolean default false not null,
+  approved                      integer(1) default 0 not null,
+  edit                          integer(1) default 0 not null,
   edit_date                     varchar(255),
-  edit_approved                 boolean default false not null,
-  deleted                       boolean default false not null,
+  edit_approved                 integer(1) default 0 not null,
+  deleted                       integer(1) default 0 not null,
   delete_date                   varchar(255),
-  delete_approved               boolean default false not null,
+  delete_approved               integer(1) default 0 not null,
   constraint pk_tbroles primary key (id)
 );
 
 create table tbusersmanagement (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   first_name                    varchar(255),
   mid_name                      varchar(255),
   last_name                     varchar(255),
@@ -524,66 +524,66 @@ create table tbusersmanagement (
   created_by                    varchar(255),
   date_created                  varchar(255),
   remarks                       varchar(255),
-  reset_pass                    boolean default false not null,
+  reset_pass                    integer(1) default 0 not null,
   pass_reset_by                 varchar(255),
   pass_reset_date               timestamp,
-  disabled                      boolean default false not null,
+  disabled                      integer(1) default 0 not null,
   disabled_by                   varchar(255),
   disabled_date                 timestamp,
   constraint pk_tbusersmanagement primary key (id)
 );
 
 create table t_tills (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   order_number                  varchar(255),
   till_type                     varchar(255),
   store_number                  varchar(255),
   till_number                   varchar(255),
   createdby                     varchar(255),
   order_date                    varchar(255),
-  is_approved                   boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
   approved_date                 varchar(255),
   approved_by                   varchar(255),
-  is_deleted                    boolean default false not null,
+  is_deleted                    integer(1) default 0 not null,
   deleted_by                    varchar(255),
-  is_delete_approved            boolean default false not null,
+  is_delete_approved            integer(1) default 0 not null,
   delete_approved_by            varchar(255),
   delete_approved_date          varchar(255),
   constraint pk_t_tills primary key (id)
 );
 
 create table t_tills_application (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   order_number                  varchar(255),
   till_type                     varchar(255),
   createdby                     varchar(255),
   order_date                    varchar(255),
-  is_approved                   boolean default false not null,
-  is_confirmed                  boolean default false not null,
+  is_approved                   integer(1) default 0 not null,
+  is_confirmed                  integer(1) default 0 not null,
   approved_date                 varchar(255),
   approved_by                   varchar(255),
-  is_deleted                    boolean default false not null,
+  is_deleted                    integer(1) default 0 not null,
   deleted_by                    varchar(255),
-  is_delete_approved            boolean default false not null,
+  is_delete_approved            integer(1) default 0 not null,
   delete_approved_by            varchar(255),
   delete_approved_date          varchar(255),
   constraint pk_t_tills_application primary key (id)
 );
 
 create table tbuserpermissions (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   permission_value              varchar(255),
   constraint pk_tbuserpermissions primary key (id)
 );
 
 create table tbuserrole (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   role_name                     varchar(255),
   constraint pk_tbuserrole primary key (id)
 );
 
 create table tbuserauthorization (
-  id                            integer auto_increment not null,
+  id                            integer not null,
   role                          varchar(255),
   permissions                   varchar(4000),
   constraint pk_tbuserauthorization primary key (id)
