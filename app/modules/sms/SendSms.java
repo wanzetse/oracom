@@ -159,8 +159,10 @@ public class SendSms extends SMSconfig {
         List<String> msisdnList = HeadOffice.finder.query().where().contains("Full_Names", "A").select("Phone_1").findSingleAttributeList();
 
         if (msisdnList.isEmpty()) {
+            List<String> ms=new ArrayList<String>();
+            ms.add("heloo");
 
-            return null;
+            return ms;
 
         }
         BranchesController.logger.info("-----------------------------------------------MSISDN | {} |", msisdnList);

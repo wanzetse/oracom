@@ -1,30 +1,3 @@
-function GetSelected() {
-    
-   var table=document.getElementsByClassName("jsgrid-table")[1];
-   table.id="jt";
-   var emails=[];
-  
-   // loop over each table row (tr)
-   $("#jt tr").each(function(){
-        var currentRow=$(this);
-        var col2_value=currentRow.find("td:eq(1)");
-        var emai=currentRow.find("td:eq(6)").text();
-        var ino=col2_value.find("input");
-       
-        
-if(emai.length>4&&ino.prop("checked")==true)
-         
-{
-    emails.push(emai);
-}
-   });
-    
-
-  
-  return emails;
-
-}
-
 
 
 $(document).ready(function () {
@@ -74,13 +47,13 @@ $(document).ready(function () {
 
             }
         };
-        var emails=GetSelected();
+
         var data = JSON.stringify({
             "subjectTextField": subjectTextField,
             "bodyTextField": bodyTextField,
             "fromTextField": fromTextField,
             "passwordTextField": passwordTextField,
-            "emails":emails
+
 
         });
         

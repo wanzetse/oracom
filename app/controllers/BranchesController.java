@@ -154,11 +154,7 @@ public class BranchesController extends Controller {
 
         JsonNode json = request().body().asJson();
         ObjectNode result = Json.newObject();
-        emails=json.get("emails").toString();
-        String e1=emails.replaceAll("\"","");
-         String e2=e1.replace("[","");
-        String e3=e2.replace("]","");
-        String[] emaills=e3.split(",");
+
         emailFrom = json.get("fromTextField").asText();
         emailPassword = json.get("passwordTextField").asText();
         emailSubject = json.get("subjectTextField").asText();
@@ -177,7 +173,7 @@ public class BranchesController extends Controller {
         result.put("result", "Success!");
 
         sendEmail = new SendEmail();
-        sendEmail.sendBulkEmail1(emailFrom, emailPassword, emailSubject, emailBody,emaills);
+        sendEmail.sendBulkEmail(emailFrom, emailPassword, emailSubject, emailBody);
 
         logger.info("-----------------------------------------------Subject |{}| Body |{}| emails |{}|", emailSubject, emailBody,emails);
 
