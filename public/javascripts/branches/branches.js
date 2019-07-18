@@ -362,7 +362,7 @@ $(function () {
             editing: true,
             sorting: true,
             paging: true,
-            //pageLoading: true,
+            pageLoading: true,
             pageSize: 50,
             pageIndex: 1,
             loadShading: true,

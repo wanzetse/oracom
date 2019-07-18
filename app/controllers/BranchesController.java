@@ -135,15 +135,20 @@ public class BranchesController extends Controller {
 
         } else {
             result.put("result", "Success!");
+try {
+    SendSms.sendSMS(SENDER_ID, senderIdUsername, senderIdPassword, SMSbody);
 
-            SendSms.sendSMS(SENDER_ID, senderIdUsername, senderIdPassword, SMSbody);
-
-
+}catch (Exception e){
+    e.printStackTrace();
+    result.put("result","Authentication Or network Connection failure");
+    return CompletableFuture.completedFuture(ok(result));
+}
             String subject = "RE: HEALTH CHECK " + "\n";
             String body = session().get("Username") + " Sent bulk SMS:  on " + HeadOfficeController.dateTimeFormatter.format(HeadOfficeController.currentDateTime) + " and received \t RESPONSE: " + result.get("result");
             SendEmail.sendHealthCheckEmail(subject, body);
 
             logger.info("+++++++++++++++++++++++++++++++++++++++BULK SMS |{}|", SMSbody);
+
         }
         return CompletableFuture.completedFuture(ok(result));
     }

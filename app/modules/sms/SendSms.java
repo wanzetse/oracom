@@ -1,6 +1,5 @@
 package modules.sms;
 
-
 import controllers.BranchesController;
 import infobip.api.client.SendSingleTextualSms;
 import infobip.api.config.BasicAuthConfiguration;
@@ -9,7 +8,6 @@ import infobip.api.model.sms.mt.send.SMSResponseDetails;
 import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
 import models.Branch;
 import models.HeadOffice;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -141,11 +139,7 @@ public class SendSms extends SMSconfig {
 
         List<String> msisdnList = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Phone_2").findSingleAttributeList();
 
-        if (msisdnList.isEmpty()) {
 
-            return null;
-
-        }
         BranchesController.logger.info("-----------------------------------------------MSISDN | {} |", msisdnList);
 
         return msisdnList;
@@ -158,13 +152,7 @@ public class SendSms extends SMSconfig {
         // List<String> msisdnList = Branch.finder.query().where().eq("selected", Boolean.TRUE).select("Phone_1").findSingleAttributeList();
         List<String> msisdnList = HeadOffice.finder.query().where().contains("Full_Names", "A").select("Phone_1").findSingleAttributeList();
 
-        if (msisdnList.isEmpty()) {
-            List<String> ms=new ArrayList<String>();
-            ms.add("heloo");
 
-            return ms;
-
-        }
         BranchesController.logger.info("-----------------------------------------------MSISDN | {} |", msisdnList);
 
         return msisdnList;

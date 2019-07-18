@@ -9,6 +9,9 @@ $(document).ready(function () {
         };
         var indeterminateProgress = new Mprogress(intObj);
         var smsbodyTextField = document.getElementById("smsbodyTextField").value;
+        var userNameTextField = document.getElementById("userNameTextField").value;
+        var senderIDTextField = document.getElementById("senderIDTextField").value;
+        var senderIDPasswordTextField= document.getElementById("senderIDPasswordTextField").value;
         indeterminateProgress.start();
 
         // Material.toast("Successful");
@@ -59,7 +62,7 @@ $(document).ready(function () {
                 } else {
                     indeterminateProgress.end();
                     // window.location.href = "oracom/dashboard"
-                    swal("Error", "Please try again!", "error");
+                    swal("Error", json.result, "error");
                 }
 
             }
